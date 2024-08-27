@@ -58,13 +58,13 @@ public class Main {
                         toCountry = matcher.group();
                     System.out.println("Enter date of the flight in the form 'DD.MM.YYYY': ");
                     String date = scanner.nextLine();
-                    while(!Pattern.matches("([0][1-9]|[1-2][0-9]|[3][0-1])\\.([0][1-9]|[1][0-2])\\.([20]([2][4-9]|[3-9][0-9]))",date)){
+                    while(!Pattern.matches("(0[1-9]|[1-2][0-9]|3[0-1])\\.(0[1-9]|1[0-2])\\.(20(2[4-9]|[3-9][0-9]))",date)){
                         System.out.println("Invalid Input!!");
                         date = scanner.nextLine();
                     }
                     System.out.println("Enter date of the flight in the form 'HH:MM' (24hr-system): ");
                     String time = scanner.nextLine();
-                    while(!Pattern.matches("([0-1][0-9]|[2][0-3])\\:([0-5][0-9])",date)){
+                    while(!Pattern.matches("([0-1][0-9]|2[0-3])\\:([0-5][0-9])",time)){
                         System.out.println("Invalid Input!!");
                         time = scanner.nextLine();
                     }
