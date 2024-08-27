@@ -44,23 +44,31 @@ public class Flight {
         this.date = date;
     }
 
-    public String getTo() {
+    public Location getTo() {
         return to;
     }
 
-    public void setTo(String to) {
-        this.to = to;
+    public void setTo(String city, String country) {
+        this.to.setCity(city);
+        this.to.setCountry(country);
     }
 
-    public String getFrom() {
+    public Location getFrom() {
         return from;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public void setFrom(String city, String country) {
+        this.from.setCity(city);
+        this.from.setCountry(country);
     }
 
+    public FlightType getFlightType() {
+        return flightType;
+    }
 
+    public void setFlightType(FlightType flightType) {
+        this.flightType = flightType;
+    }
 
     private boolean bookSeat(){
         return true;
