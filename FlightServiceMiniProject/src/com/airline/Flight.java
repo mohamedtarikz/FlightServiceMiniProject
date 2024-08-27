@@ -9,13 +9,13 @@ public class Flight {
     private int passengersCount;
     private int availableSeats;
     private List<Passenger> passengers;
-    private String from;
-    private String to;
+    private Location from;
+    private Location to;
     private String date;
     private String time;
 
 
-    public Flight(FlightType flightType, String from, String to, String date, String time) {
+    public Flight(FlightType flightType, Location from, Location to, String date, String time) {
         this.flightType = flightType;
         this.passengersCount = 0;
         this.availableSeats = 0;
