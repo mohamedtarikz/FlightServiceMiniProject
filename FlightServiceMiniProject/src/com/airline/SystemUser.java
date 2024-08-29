@@ -18,6 +18,10 @@ public abstract class SystemUser {
         return systemUser;
     }
 
+    public void logout(){
+        System.out.println("Good Bye!");
+    }
+
     public String getPassword() {return password;}
     public void setPassword(String password) {this.password = password;}
 

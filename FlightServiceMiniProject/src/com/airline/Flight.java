@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Flight {
 
+    private String id;
     private FlightType flightType;
     private int passengersCount;
     private int availableSeats;
@@ -15,7 +16,8 @@ public class Flight {
     private String time;
 
 
-    public Flight(FlightType flightType, Location from, Location to, String date, String time) {
+    public Flight(String id, FlightType flightType, Location from, Location to, String date, String time) {
+        this.id = id;
         this.flightType = flightType;
         this.passengersCount = 0;
         this.availableSeats = 0;
@@ -27,6 +29,13 @@ public class Flight {
 
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getTime() {
         return time;
@@ -87,9 +96,9 @@ public class Flight {
     public String toString() {
 
         System.out.println("========================= Print Flight ======================");
-        System.out.println("Flight Type: " + this.flightType);
-        System.out.println("From: " + this.from);
-        System.out.println("To: " + this.to);
+        System.out.println("ID: " + this.id);
+        System.out.println("From: " + this.from.getCity() + ", " + this.from.getCountry());
+        System.out.println("To: " + this.to.getCity() + ", " + this.to.getCountry());
         System.out.println("Date: " + this.date);
         System.out.println("Time: " + this.time);
         System.out.println("Available Seats: " + this.availableSeats);

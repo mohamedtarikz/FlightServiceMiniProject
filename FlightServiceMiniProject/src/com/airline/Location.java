@@ -5,8 +5,8 @@ public class Location {
     private String country;
 
     public Location(String city, String country){
-        this.city = city;
-        this.country = country;
+        this.city = city.toUpperCase();
+        this.country = country.toUpperCase();
     }
 
     public String getCity() {
