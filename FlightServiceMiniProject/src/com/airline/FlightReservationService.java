@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.List;
 
 public class FlightReservationService {
-
     public static int num_dom = 0;
     public static int num_int = 0;
     public FlightReservationService(){
