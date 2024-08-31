@@ -15,27 +15,27 @@ public class FlightReservationService {
     private List<Flight> int_Flights = new ArrayList<>();
 
     private void printAvailableInternationalFlights() {
-        System.out.println(dom_Flights);
-    }
-    private void printAvailableDomesticFlights() {
         System.out.println(int_Flights);
     }
+    private void printAvailableDomesticFlights() {
+        System.out.println(dom_Flights);
+    }
     private void InitFlights(){
-        dom_Flights.add(new Flight("D"+ Integer.toString(++num_dom),FlightType.DOMESTIC,new Location("Cairo", "Egypt"),new Location("Aswan", "Egypt"),"30.8.2024","08:00"));
-        dom_Flights.add(new Flight("D"+ Integer.toString(++num_dom),FlightType.DOMESTIC,new Location("Luxor", "Egypt"),new Location("Cairo", "Egypt"),"10.9.2024","10:00"));
-        dom_Flights.add(new Flight("D"+ Integer.toString(++num_dom),FlightType.DOMESTIC,new Location("Hurghada", "Egypt"),new Location("Luxor", "Egypt"),"20.9.2024","15:30"));
-        dom_Flights.add(new Flight("D"+ Integer.toString(++num_dom),FlightType.DOMESTIC,new Location("Cairo", "Egypt"),new Location("Hurghada", "Egypt"),"30.9.2024","11:00"));
+        dom_Flights.add(new Flight("D"+ Integer.toString(++num_dom),FlightType.DOMESTIC,25,99.99,new Location("Cairo", "Egypt"),new Location("Aswan", "Egypt"),"30.8.2024","08:00"));
+        dom_Flights.add(new Flight("D"+ Integer.toString(++num_dom),FlightType.DOMESTIC,10,124.99,new Location("Luxor", "Egypt"),new Location("Cairo", "Egypt"),"10.9.2024","10:00"));
+        dom_Flights.add(new Flight("D"+ Integer.toString(++num_dom),FlightType.DOMESTIC,15,74.99,new Location("Hurghada", "Egypt"),new Location("Luxor", "Egypt"),"20.9.2024","15:30"));
+        dom_Flights.add(new Flight("D"+ Integer.toString(++num_dom),FlightType.DOMESTIC,20,49.99,new Location("Cairo", "Egypt"),new Location("Hurghada", "Egypt"),"30.9.2024","11:00"));
 
-        int_Flights.add(new Flight("I"+ Integer.toString(++num_int),FlightType.INTERNATIONAL,new Location("Cairo", "Egypt"),new Location("Amsterdam", "Netherlands"),"6.10.2024","09:00"));
-        int_Flights.add(new Flight("I"+ Integer.toString(++num_int),FlightType.INTERNATIONAL,new Location("Moscow", "Russia"),new Location("Hurghada", "Egypt"),"8.9.2024","18:00"));
-        int_Flights.add(new Flight("I"+ Integer.toString(++num_int),FlightType.INTERNATIONAL,new Location("Cairo", "Egypt"),new Location("London", "UK"),"6.11.2024","13:00"));
-        int_Flights.add(new Flight("I"+ Integer.toString(++num_int),FlightType.INTERNATIONAL,new Location("Berlin", "Germany"),new Location("Luxor", "Egypt"),"8.10.2024","11:00"));
-        int_Flights.add(new Flight("I"+ Integer.toString(++num_int),FlightType.INTERNATIONAL,new Location("Cairo", "Egypt"),new Location("Riyad", "KSA"),"7.11.2024","07:00"));
+        int_Flights.add(new Flight("I"+ Integer.toString(++num_int),FlightType.INTERNATIONAL,30,299.99,new Location("Cairo", "Egypt"),new Location("Amsterdam", "Netherlands"),"6.10.2024","09:00"));
+        int_Flights.add(new Flight("I"+ Integer.toString(++num_int),FlightType.INTERNATIONAL,40,349.99,new Location("Moscow", "Russia"),new Location("Hurghada", "Egypt"),"8.9.2024","18:00"));
+        int_Flights.add(new Flight("I"+ Integer.toString(++num_int),FlightType.INTERNATIONAL,35,274.99,new Location("Cairo", "Egypt"),new Location("London", "UK"),"6.11.2024","13:00"));
+        int_Flights.add(new Flight("I"+ Integer.toString(++num_int),FlightType.INTERNATIONAL,40,299.99,new Location("Berlin", "Germany"),new Location("Luxor", "Egypt"),"8.10.2024","11:00"));
+        int_Flights.add(new Flight("I"+ Integer.toString(++num_int),FlightType.INTERNATIONAL,25,149.99,new Location("Cairo", "Egypt"),new Location("Riyad", "KSA"),"7.11.2024","07:00"));
 
     }
 
     public void printAvailableFlights(FlightType flightType) {
-        if(FlightType.INTERNATIONAL == flightType)
+        if(flightType == FlightType.INTERNATIONAL)
             printAvailableInternationalFlights();
         else
             printAvailableDomesticFlights();
@@ -162,7 +162,63 @@ public class FlightReservationService {
             }
         }
     }
-
+    public boolean bookFlight(String id, Passenger user, int tickets){
+        if(id.charAt(0) == 'D') {
+            Iterator<Flight> iterator = dom_Flights.iterator();
+            while (iterator.hasNext()) {
+                Flight item = iterator.next();
+                if (item.getId().equals(id)) {
+                    if (tickets > item.getAvailableSeats()) {
+                        return false;
+                    }
+                    item.bookSeat(user, tickets);
+                    return true;
+                }
+            }
+        }else if(id.charAt(0) == 'I'){
+            Iterator<Flight> iterator = int_Flights.iterator();
+            while (iterator.hasNext()) {
+                Flight item = iterator.next();
+                if (item.getId().equals(id)) {
+                    if (tickets > item.getAvailableSeats()) {
+                        return false;
+                    }
+                    item.bookSeat(user, tickets);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public boolean cancelFlight(String id, Passenger user, int tickets){
+        if(id.charAt(0) == 'D'){
+            Iterator<Flight> iterator = dom_Flights.iterator();
+            while(iterator.hasNext()){
+                Flight item = iterator.next();
+                if(item.getId().equals(id)){
+                    if(user.getTickets(item) < tickets){
+                        return false;
+                    }
+                    item.cancelSeat(user, tickets);
+                    return true;
+                }
+            }
+        }
+        else if(id.charAt(0) == 'I'){
+            Iterator<Flight> iterator = int_Flights.iterator();
+            while(iterator.hasNext()){
+                Flight item = iterator.next();
+                if(item.getId().equals(id)){
+                    if(user.getTickets(item) < tickets){
+                        return false;
+                    }
+                    item.cancelSeat(user, tickets);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
     public boolean checkForID(String id){
         return (int_Flights.stream().anyMatch(flight -> flight.getId().equals(id)) || dom_Flights.stream().anyMatch(flight -> flight.getId().equals(id)));
     }
@@ -204,6 +260,7 @@ public class FlightReservationService {
                 if(item.getId().equals(id)){
                     System.out.println(item);
                     found = true;
+                    break;
                 }
             }
         }
@@ -214,6 +271,33 @@ public class FlightReservationService {
                 if(item.getId().equals(id)){
                     System.out.println(item);
                     found = true;
+                    break;
+                }
+            }
+        }
+        return found;
+    }
+    public boolean printFlight(String id, FlightType flightType){
+        boolean found = false;
+        if(flightType == FlightType.DOMESTIC){
+            Iterator<Flight> iterator = dom_Flights.iterator();
+            while(iterator.hasNext()){
+                Flight item = iterator.next();
+                if(item.getId().equals(id)){
+                    System.out.println(item);
+                    found = true;
+                    break;
+                }
+            }
+        }
+        else if(flightType == FlightType.INTERNATIONAL){
+            Iterator<Flight> iterator = int_Flights.iterator();
+            while(iterator.hasNext()){
+                Flight item = iterator.next();
+                if(item.getId().equals(id)){
+                    System.out.println(item);
+                    found = true;
+                    break;
                 }
             }
         }

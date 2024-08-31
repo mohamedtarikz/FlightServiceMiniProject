@@ -1,15 +1,17 @@
 package com.airline;
 
+import java.util.*;
+
 public abstract class SystemUser {
     private String username;
     private String password;
     private UserType userType;
 
-    public static SystemUser login(String username, String password, UserService service) {
 
+    public static SystemUser login(String username, String password, UserService service) {
         SystemUser systemUser = null;
         for(SystemUser user : service.getUsers()) {
-            if (user.username.equals(username) && user.password.equals(password)) {
+            if (user.username.toLowerCase().equals(username) && user.password.equals(password)) {
                 systemUser = user;
                 break;
             }
@@ -30,4 +32,16 @@ public abstract class SystemUser {
 
     public String getUsername() {return username;}
     public void setUsername(String username) {this.username = username;}
+
+    public boolean printFlights(){
+        return false;
+    }
+
+    public boolean getFlightInfo(String id){
+        return false;
+    }
+    @Override
+    public String toString() {
+        return username;
+    }
 }

@@ -1,6 +1,6 @@
 package com.airline;
 
-public class Adminstrator extends SystemUser implements AddFlight {
+public class Adminstrator extends SystemUser {
 
 
     public Adminstrator(String name, String pass) {
@@ -10,12 +10,7 @@ public class Adminstrator extends SystemUser implements AddFlight {
     }
 
     @Override
-    public boolean addFlight(Flight flight) {
-        return false;
-    }
-
-    @Override
     public String toString() {
-        return "Administrator [getUsername()=" + getUsername() + ", getPassword()=" + getPassword() + ", getUserType()=" + getUserType() + "]" ;
+        return "Administrator [Username = " + getUsername() + ", Password = " + getPassword() +  "]" ;
     }
 }

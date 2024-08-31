@@ -7,8 +7,9 @@ public class Flight {
 
     private String id;
     private FlightType flightType;
-    private int passengersCount;
     private int availableSeats;
+    private int seats;
+    private double price;
     private List<Passenger> passengers;
     private Location from;
     private Location to;
@@ -16,11 +17,12 @@ public class Flight {
     private String time;
 
 
-    public Flight(String id, FlightType flightType, Location from, Location to, String date, String time) {
+    public Flight(String id, FlightType flightType, int seats,double price, Location from, Location to, String date, String time) {
         this.id = id;
         this.flightType = flightType;
-        this.passengersCount = 0;
-        this.availableSeats = 0;
+        this.availableSeats = seats;
+        this.seats = seats;
+        this.price = price;
         this.passengers = new ArrayList<Passenger>();
         this.from = from;
         this.to = to;
@@ -79,16 +81,29 @@ public class Flight {
         this.flightType = flightType;
     }
 
-    private boolean bookSeat(){
-        return true;
+    public int getAvailableSeats(){
+        return this.availableSeats;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void bookSeat(Passenger passenger, int tickets){
+        if(!passengers.contains(passenger))
+            passengers.add(passenger);
+        passenger.bookFlight(this, tickets);
+        availableSeats -= tickets;
+    }
+    public void cancelSeat(Passenger passenger, int tickets){
+        passenger.cancelFlight(this.id, tickets);
+        if (passenger.getTickets(this) == 0)
+            passengers.remove(passenger);
+        availableSeats += tickets;
     }
 
     private List<Passenger> getPassengers(){
         return this.passengers;
-    }
-
-    private int getAvailableSeats(){
-        return this.availableSeats;
     }
 
 
@@ -102,6 +117,7 @@ public class Flight {
         System.out.println("Date: " + this.date);
         System.out.println("Time: " + this.time);
         System.out.println("Available Seats: " + this.availableSeats);
+        System.out.println("Price: " + this.price);
         System.out.println("Passengers: " + this.passengers);
         System.out.println("==================================================");
 
