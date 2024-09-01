@@ -81,7 +81,7 @@ public class Main {
                     // Get the price of the flight
                     System.out.println("Enter price of flight: ");
                     String price = scanner.nextLine();
-                    if (!Pattern.matches("\\d+\\.?(0[1-9]|[1-9][0-9])", price)) {
+                    if (!Pattern.matches("\\d+(\\.(0[1-9]|[1-9][0-9]))?", price)) {
                         System.out.println("Invalid Input!!");
                         continue;
                     }
