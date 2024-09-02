@@ -1,5 +1,7 @@
 package airline;
 
+import java.util.Scanner;
+
 public class Admin extends SysUser {
     public Admin(String name, String pass) {
         this.setUsername(name);
@@ -15,6 +17,10 @@ public class Admin extends SysUser {
             FlightSystem.addFlight(new Flight("I" + (++FlightSystem.num_int),FlightType.INTERNATIONAL,seats,price,from,to,date,time));
         }
     }
+    public boolean removeFlight(String flight_id) {
+        return FlightSystem.removeFlight(flight_id);
+    }
+
     @Override
     public void viewOptions() {
         System.out.println("\nA- Add Flight\nB- Delete Flight\nC- Modify Flight\nD- List Flights\nE- EXIT");

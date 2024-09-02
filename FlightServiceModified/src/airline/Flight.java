@@ -30,7 +30,6 @@ public class Flight {
     public String getId() {
         return id;
     }
-
     public void setId(String id) {
         this.id = id;
     }
@@ -38,7 +37,6 @@ public class Flight {
     public FlightType getFlightType() {
         return flightType;
     }
-
     public void setFlightType(FlightType flightType) {
         this.flightType = flightType;
     }
@@ -46,7 +44,6 @@ public class Flight {
     public int getSeats() {
         return seats;
     }
-
     public void setSeats(int seats) {
         this.seats = seats;
     }
@@ -54,7 +51,6 @@ public class Flight {
     public double getPrice() {
         return price;
     }
-
     public void setPrice(double price) {
         this.price = price;
     }
@@ -66,7 +62,6 @@ public class Flight {
     public Location getFrom() {
         return from;
     }
-
     public void setFrom(Location from) {
         this.from = from;
     }
@@ -74,7 +69,6 @@ public class Flight {
     public Location getTo() {
         return to;
     }
-
     public void setTo(Location to) {
         this.to = to;
     }
@@ -82,7 +76,6 @@ public class Flight {
     public String getDate() {
         return date;
     }
-
     public void setDate(String date) {
         this.date = date;
     }
@@ -90,7 +83,6 @@ public class Flight {
     public String getTime() {
         return time;
     }
-
     public void setTime(String time) {
         this.time = time;
     }
