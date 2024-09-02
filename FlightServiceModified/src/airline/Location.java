@@ -1,7 +1,7 @@
 package airline;
 
 public class Location {
-    final String city, country;
+    private final String city, country;
 
     public Location(String city, String country) {
         this.city = city.toUpperCase();

@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        FlightSystem.initFlights();
 
         System.out.println("\nWelcome to airline system!\n");
 
@@ -60,6 +61,9 @@ public class Main {
                             }
                             ////////////////////////////////////////////////
                             //Create a new flight//
+                            admin.addFlight(From, To, date, time, seats, price);
+                            System.out.println("Flight added successfully!");
+                            ////////////////////////////////////////////////
                             break;
                         case AdminInput.B:
                             //
