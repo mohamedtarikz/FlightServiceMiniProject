@@ -22,8 +22,8 @@ public class Main {
 
         if(user.getUserType() == UserType.ADMIN){
             Admin admin = (Admin)user;
-            InputSystem inputSystem = new InputSystem();
-            AdminEventsManager eventsManager = new AdminEventsManager();
+            AdminInputSystem adminInputSystem = new AdminInputSystem();
+            AdminEventsManager adminEventsManager = new AdminEventsManager();
             while(true) {
                 OutputSystem.viewOptions(UserType.ADMIN);
                 String choice = scanner.nextLine();
@@ -32,21 +32,21 @@ public class Main {
                     switch (input) {
                         case AdminInput.A:
                             // Register listener for adding new flight
-                            eventsManager.add_AddFlight_Listener(inputSystem);
+                            adminEventsManager.add_AddFlight_Listener(adminInputSystem);
                             // Fire event to add new flight
-                            eventsManager.fireAddFlight(admin, scanner);
+                            adminEventsManager.fireAddFlight(admin, scanner);
                             break;
                         case AdminInput.B:
                             // Register listener for removing flight
-                            eventsManager.add_RemoveFlight_Listener(inputSystem);
+                            adminEventsManager.add_RemoveFlight_Listener(adminInputSystem);
                             // Fire event to remove flight
-                            eventsManager.fireRemoveFlight(admin, scanner);
+                            adminEventsManager.fireRemoveFlight(admin, scanner);
                             break;
                         case AdminInput.C:
                             // Register listener for modifying flight
-                            eventsManager.add_ModifyFlight_Listener(inputSystem);
+                            adminEventsManager.add_ModifyFlight_Listener(adminInputSystem);
                             // Fire event to modify flight
-                            eventsManager.fireModifyFlight(admin, scanner);
+                            adminEventsManager.fireModifyFlight(admin, scanner);
                             break;
                         case AdminInput.D:
                             // View all flights

@@ -2,7 +2,7 @@ package airline;
 
 import java.util.Scanner;
 import java.util.regex.*;
-public class InputSystem implements AddFlightListener,RemoveFlightListener,ModifyFlightListener{
+public class AdminInputSystem implements AddFlightListener,RemoveFlightListener,ModifyFlightListener{
     // Methods to handle admin addition of a new flight
     private Location takeLocationInput(Scanner scanner) {
         String location = scanner.nextLine();
