@@ -46,7 +46,6 @@ public class AdminInputSystem extends InputSystem{
         ////////////////////////////////////////////////
     }
 
-
     public void onRemoveFlight(Scanner scanner) {
         OutputSystem.printFlights();
         System.out.print("Enter the FlightID to remove: ");
