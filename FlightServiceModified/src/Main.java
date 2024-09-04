@@ -53,6 +53,8 @@ public class Main {
                             OutputSystem.printFlights();
                             break;
                         case AdminInput.E:
+                            // Logout and exit
+                            System.out.println("Goodbye!");
                             return;
                     }
                 } catch (IllegalArgumentException e) {
