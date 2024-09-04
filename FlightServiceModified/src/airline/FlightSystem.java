@@ -22,6 +22,26 @@ public class FlightSystem{
         interFlights.add(new Flight("I"+ (++num_int),FlightType.INTERNATIONAL,25,149.99,new Location("Cairo", "Egypt"),new Location("Riyad", "KSA"),"7.11.2024","07:00"));
 
     }
+    public static List<Flight> getFlights(FlightType type){
+        if(type == FlightType.DOMESTIC)
+            return domFlights;
+        else if(type == FlightType.INTERNATIONAL)
+            return interFlights;
+        return null;
+    }
+    public static Flight getFlight(String id){
+        for (Flight flight : domFlights) {
+            if (flight.getId().equals(id)) {
+                return flight;
+            }
+        }
+        for (Flight flight : interFlights) {
+            if (flight.getId().equals(id)) {
+                return flight;
+            }
+        }
+        return null;
+    }
     public static void addFlight(Flight flight){
         if(flight.getFlightType() == FlightType.DOMESTIC)
             domFlights.add(flight);
@@ -49,6 +69,22 @@ public class FlightSystem{
             return false;
         }
         return false;
+    }
+    public static void modifyFlight(String id, ModificationOptions option, String value) {
+        Flight flightMod = getFlight(id);
+        switch (option) {
+            case A :
+                flightMod.setDate(value);
+                break;
+            case B :
+                flightMod.setTime(value);
+                break;
+            case C :
+                flightMod.setSeats(Integer.parseInt(value));
+                break;
+            case D :
+                flightMod.setPrice(Double.parseDouble(value));
+        }
     }
 
 }

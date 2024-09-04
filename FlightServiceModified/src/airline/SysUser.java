@@ -41,5 +41,4 @@ public abstract class SysUser {
         this.userType = userType;
     }
 
-    public abstract void viewOptions();
 }

@@ -56,9 +56,9 @@ public class InputSystem implements AddFlightListener,RemoveFlightListener,Modif
             return ret_price;
     }
     private String takeFlightIDInput(Scanner scanner) {
-        String flightID = scanner.nextLine();
+        String flightID = scanner.nextLine().toUpperCase();
         if (!Pattern.matches("[ID]\\d+", flightID)) {
-            System.out.println("Invalid Input! FlightID should be a valid string!!");
+            System.out.println("Invalid Input! No Such ID!!");
             return null;
         }
         return flightID;
@@ -110,6 +110,7 @@ public class InputSystem implements AddFlightListener,RemoveFlightListener,Modif
 
     @Override
     public void onRemoveFlight(RemoveFlightEvent event, Admin admin, Scanner scanner) {
+        OutputSystem.printFlights();
         System.out.print("Enter the FlightID to remove: ");
         String flightID = takeFlightIDInput(scanner);
         if (flightID != null && admin.removeFlight(flightID)) {
@@ -121,9 +122,62 @@ public class InputSystem implements AddFlightListener,RemoveFlightListener,Modif
     }
 
     @Override
-    public void modifyFlight(ModifyFlightEvent event, Admin admin, Scanner scanner) {
+    public void onModifyFlight(ModifyFlightEvent event, Admin admin, Scanner scanner) {
+        OutputSystem.printFlights();
         System.out.println("Enter the FlightID to modify: ");
         String flightID = takeFlightIDInput(scanner);
-
+        if(!OutputSystem.printFlight(flightID)){
+            System.out.println("FlightID not found!");
+            return;
+        }
+        System.out.println("Choose property to be modified: ");
+        System.out.println("A- Date\nB- Time\nC- Seats\nD- Price\nAnything else to CANCEL!");
+        String choice = scanner.nextLine().toUpperCase();
+        ModificationOptions mod = ModificationOptions.valueOf(choice);
+        try{
+            switch (mod) {
+                case A:
+                    System.out.println("Enter the new departure date in the form 'DD.MM.YYYY': ");
+                    String date = takeDateInput(scanner);
+                    if (date == null) {
+                        System.out.println("INVALID INPUT! Format should be 'DD.MM.YYYY'!");
+                        return;
+                    }
+                    admin.modifyFlight(flightID, mod, date);
+                    break;
+                case B:
+                    System.out.println("Enter the new departure time in the form 'HH:MM' (24-hour format): ");
+                    String time = takeTimeInput(scanner);
+                    if (time == null) {
+                        System.out.println("INVALID INPUT! Format should be 'HH:MM'!");
+                        return;
+                    }
+                    admin.modifyFlight(flightID, mod, time);
+                    break;
+                case C:
+                    System.out.println("Enter the new number of seats: ");
+                    int seats = takeSeatsInput(scanner);
+                    if (seats == -1) {
+                        System.out.println("INVALID INPUT! Seats should be a valid integer!");
+                        return;
+                    }
+                    admin.modifyFlight(flightID, mod, Integer.toString(seats));
+                    break;
+                case D:
+                    System.out.println("Enter the new price per seat: ");
+                    double price = takePriceInput(scanner);
+                    if (price == -1) {
+                        System.out.println("INVALID INPUT! Price should be a valid decimal number!");
+                        return;
+                    }
+                    admin.modifyFlight(flightID, mod, Double.toString(price));
+                    break;
+                default:
+                    return;
+            }
+        }
+        catch (IllegalArgumentException e){
+            return;
+        }
     }
 }

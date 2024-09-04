@@ -6,10 +6,4 @@ public class Passenger extends SysUser{
         this.setPassword(pass);
         this.setUserType(UserType.PASSENGER);
     }
-
-    @Override
-    public void viewOptions() {
-        System.out.println("\nA- Book Tickets\nB- Cancel Bookings\nC- View Bookings\nD- EXIT");
-        System.out.print("Please enter your choice: ");
-    }
 }

@@ -20,10 +20,7 @@ public class Admin extends SysUser {
     public boolean removeFlight(String flight_id) {
         return FlightSystem.removeFlight(flight_id);
     }
-
-    @Override
-    public void viewOptions() {
-        System.out.println("\nA- Add Flight\nB- Delete Flight\nC- Modify Flight\nD- List Flights\nE- EXIT");
-        System.out.print("Please enter your choice: ");
+    public void modifyFlight(String flightID, ModificationOptions option, String value) {
+        FlightSystem.modifyFlight(flightID,option,value);
     }
 }

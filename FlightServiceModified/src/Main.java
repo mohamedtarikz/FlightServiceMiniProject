@@ -25,7 +25,7 @@ public class Main {
             InputSystem inputSystem = new InputSystem();
             AdminEventsManager eventsManager = new AdminEventsManager();
             while(true) {
-                admin.viewOptions();
+                OutputSystem.viewOptions(UserType.ADMIN);
                 String choice = scanner.nextLine();
                 try {
                     AdminInput input = AdminInput.valueOf(choice.toUpperCase());
@@ -35,22 +35,22 @@ public class Main {
                             eventsManager.add_AddFlight_Listener(inputSystem);
                             // Fire event to add new flight
                             eventsManager.fireAddFlight(admin, scanner);
-                            // Remove Listener after the event is done
-                            eventsManager.remove_AddFlight_Listener(inputSystem);
                             break;
                         case AdminInput.B:
                             // Register listener for removing flight
                             eventsManager.add_RemoveFlight_Listener(inputSystem);
                             // Fire event to remove flight
                             eventsManager.fireRemoveFlight(admin, scanner);
-                            // Remove Listener after the event is done
-                            eventsManager.remove_RemoveFlight_Listener(inputSystem);
                             break;
                         case AdminInput.C:
-                            //
+                            // Register listener for modifying flight
+                            eventsManager.add_ModifyFlight_Listener(inputSystem);
+                            // Fire event to modify flight
+                            eventsManager.fireModifyFlight(admin, scanner);
                             break;
                         case AdminInput.D:
-                            //
+                            // View all flights
+                            OutputSystem.printFlights();
                             break;
                         case AdminInput.E:
                             return;
@@ -62,7 +62,7 @@ public class Main {
         }
         else{
             Passenger passenger = (Passenger)user;
-            passenger.viewOptions();
+            OutputSystem.viewOptions(UserType.PASSENGER);
         }
     }
 }

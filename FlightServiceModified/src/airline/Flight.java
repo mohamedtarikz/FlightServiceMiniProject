@@ -62,15 +62,9 @@ public class Flight {
     public Location getFrom() {
         return from;
     }
-    public void setFrom(Location from) {
-        this.from = from;
-    }
 
     public Location getTo() {
         return to;
-    }
-    public void setTo(Location to) {
-        this.to = to;
     }
 
     public String getDate() {
@@ -85,5 +79,20 @@ public class Flight {
     }
     public void setTime(String time) {
         this.time = time;
+    }
+
+    @Override
+    public String toString() {
+        System.out.println("================================================");
+        System.out.println("    FlightID = " + id);
+        System.out.println("    Take-off = " + from.getCity() + ", " + from.getCountry());
+        System.out.println("    Destination = " + to.getCity() + ", " + to.getCountry());
+        System.out.println("    Date = " + date);
+        System.out.println("    Time = " + time);
+        System.out.println("    Remaining Seats = " + seats);
+        System.out.println("    Price = " + price);
+        System.out.println("================================================");
+
+        return "";
     }
 }

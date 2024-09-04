@@ -17,6 +17,7 @@ public class AdminEventsManager {
         for (AddFlightListener listener : addFlightListeners){
             listener.onAddFlight(event, admin, scanner);
         }
+        addFlightListeners.clear();
     }
 
     private List<RemoveFlightListener> removeFlightListeners = new ArrayList<RemoveFlightListener>();
@@ -31,5 +32,21 @@ public class AdminEventsManager {
         for (RemoveFlightListener listener : removeFlightListeners) {
             listener.onRemoveFlight(event, admin, scanner);
         }
+        removeFlightListeners.clear();
+    }
+
+    private List<ModifyFlightListener> modifyFlightListeners = new ArrayList<ModifyFlightListener>();
+    public void add_ModifyFlight_Listener(ModifyFlightListener listener) {
+        modifyFlightListeners.add(listener);
+    }
+    public void remove_ModifyFlight_Listener(ModifyFlightListener listener) {
+        modifyFlightListeners.remove(listener);
+    }
+    public void fireModifyFlight(Admin admin, Scanner scanner) {
+        ModifyFlightEvent event = new ModifyFlightEvent(this);
+        for (ModifyFlightListener listener : modifyFlightListeners) {
+            listener.onModifyFlight(event, admin, scanner);
+        }
+        modifyFlightListeners.clear();
     }
 }
