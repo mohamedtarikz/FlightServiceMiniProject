@@ -12,10 +12,10 @@ public class AdminEventsManager {
     public void remove_AddFlight_Listener(AddFlightListener listener) {
         addFlightListeners.remove(listener);
     }
-    public void fireAddFlight(Admin admin, Scanner scanner) {
+    public void fireAddFlight(Scanner scanner) {
         AddFlightEvent event = new AddFlightEvent(this);
         for (AddFlightListener listener : addFlightListeners){
-            listener.onAddFlight(event, admin, scanner);
+            listener.onAddFlight(event, scanner);
         }
         addFlightListeners.clear();
     }
@@ -27,10 +27,10 @@ public class AdminEventsManager {
     public void remove_RemoveFlight_Listener(RemoveFlightListener listener) {
         removeFlightListeners.remove(listener);
     }
-    public void fireRemoveFlight(Admin admin, Scanner scanner) {
+    public void fireRemoveFlight(Scanner scanner) {
         RemoveFlightEvent event = new RemoveFlightEvent(this);
         for (RemoveFlightListener listener : removeFlightListeners) {
-            listener.onRemoveFlight(event, admin, scanner);
+            listener.onRemoveFlight(event, scanner);
         }
         removeFlightListeners.clear();
     }
@@ -42,10 +42,10 @@ public class AdminEventsManager {
     public void remove_ModifyFlight_Listener(ModifyFlightListener listener) {
         modifyFlightListeners.remove(listener);
     }
-    public void fireModifyFlight(Admin admin, Scanner scanner) {
+    public void fireModifyFlight(Scanner scanner) {
         ModifyFlightEvent event = new ModifyFlightEvent(this);
         for (ModifyFlightListener listener : modifyFlightListeners) {
-            listener.onModifyFlight(event, admin, scanner);
+            listener.onModifyFlight(event, scanner);
         }
         modifyFlightListeners.clear();
     }

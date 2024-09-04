@@ -42,11 +42,11 @@ public class FlightSystem{
         }
         return null;
     }
-    public static void addFlight(Flight flight){
-        if(flight.getFlightType() == FlightType.DOMESTIC)
-            domFlights.add(flight);
-        else if(flight.getFlightType() == FlightType.INTERNATIONAL)
-            interFlights.add(flight);
+    public static void addFlight(Location from, Location to, String date, String time, int seats, double price){
+        if(from.getCountry().equals(to.getCountry()))
+            domFlights.add(new Flight("D" + (++num_dom),FlightType.DOMESTIC,seats,price,from,to,date,time));
+        else
+            interFlights.add(new Flight("I" + (++num_int),FlightType.INTERNATIONAL,seats,price,from,to,date,time));
     }
     public static boolean removeFlight(String id) {
         if (id.charAt(0) == 'D') {

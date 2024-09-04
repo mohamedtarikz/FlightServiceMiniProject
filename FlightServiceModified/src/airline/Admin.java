@@ -2,25 +2,24 @@ package airline;
 
 import java.util.Scanner;
 
-public class Admin extends SysUser {
+public class Admin extends SysUser implements AddFlightListener,RemoveFlightListener,ModifyFlightListener{
+    AdminInputSystem adminInputSystem = new AdminInputSystem();
+
     public Admin(String name, String pass) {
         this.setUsername(name);
         this.setPassword(pass);
         this.setUserType(UserType.ADMIN);
     }
-
-    public void addFlight(Location from, Location to, String date, String time, int seats, double price) {
-        if (from.getCountry().equals(to.getCountry())){
-            FlightSystem.addFlight(new Flight("D" + (++FlightSystem.num_dom),FlightType.DOMESTIC,seats,price,from,to,date,time));
-        }
-        else{
-            FlightSystem.addFlight(new Flight("I" + (++FlightSystem.num_int),FlightType.INTERNATIONAL,seats,price,from,to,date,time));
-        }
+    @Override
+    public void onAddFlight(AddFlightEvent event, Scanner scanner) {
+        adminInputSystem.onAddFlight(scanner);
     }
-    public boolean removeFlight(String flight_id) {
-        return FlightSystem.removeFlight(flight_id);
+    @Override
+    public void onRemoveFlight(RemoveFlightEvent event, Scanner scanner) {
+        adminInputSystem.onRemoveFlight(scanner);
     }
-    public void modifyFlight(String flightID, ModificationOptions option, String value) {
-        FlightSystem.modifyFlight(flightID,option,value);
+    @Override
+    public void onModifyFlight(ModifyFlightEvent event, Scanner scanner) {
+        adminInputSystem.onModifyFlight(scanner);
     }
 }

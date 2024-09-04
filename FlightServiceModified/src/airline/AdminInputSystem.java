@@ -1,70 +1,8 @@
 package airline;
 
 import java.util.Scanner;
-import java.util.regex.*;
-public class AdminInputSystem implements AddFlightListener,RemoveFlightListener,ModifyFlightListener{
-    // Methods to handle admin addition of a new flight
-    private Location takeLocationInput(Scanner scanner) {
-        String location = scanner.nextLine();
-        if (!Pattern.matches("[a-zA-Z]+[\\,][\\s]*[a-zA-Z]+", location)) {
-            System.out.println("Invalid Input! Format should be 'City, Country'!!");
-            return null;
-        }
-        String city = location.split(",")[0];
-        String country = location.split(",")[1];
-        return new Location(city, country);
-    }
-    private String takeTimeInput(Scanner scanner) {
-        String time = scanner.nextLine();
-        if (!Pattern.matches("([0-1][0-9]|2[0-3])\\:([0-5][0-9])", time)) {
-            System.out.println("Invalid Input! Format should be 'HH:MM'!!");
-            return null;
-        }
-        return time;
-    }
-    private String takeDateInput(Scanner scanner) {
-        String date = scanner.nextLine();
-        if (!Pattern.matches("(0[1-9]|[1-2][0-9]|3[0-1])\\.(0[1-9]|1[0-2])\\.(20(2[4-9]|[3-9][0-9]))", date)) {
-            System.out.println("Invalid Input! Format should be 'DD/MM/YYYY'!!");
-            return null;
-        }
-        return date;
-    }
-    private int takeSeatsInput(Scanner scanner) {
-        String seats = scanner.nextLine();
-        if (!Pattern.matches("[0-9]+", seats)) {
-            System.out.println("Invalid Input! Seats should be a valid integer!!");
-            return -1;
-        }
-        int ret_seats = Integer.parseInt(seats);
-        if (ret_seats <= 0)
-            return -1;
-        else
-            return ret_seats;
-
-    }
-    private double takePriceInput(Scanner scanner) {
-        String price = scanner.nextLine();
-        if (!Pattern.matches("\\d+(\\.(0[1-9]|[1-9][0-9]))?", price)) {
-            System.out.println("Invalid Input! Price should be a valid decimal number!!");
-            return -1;
-        }
-        double ret_price = Double.parseDouble(price);
-        if (ret_price <= 0)
-            return -1;
-        else
-            return ret_price;
-    }
-    private String takeFlightIDInput(Scanner scanner) {
-        String flightID = scanner.nextLine().toUpperCase();
-        if (!Pattern.matches("[ID]\\d+", flightID)) {
-            System.out.println("Invalid Input! No Such ID!!");
-            return null;
-        }
-        return flightID;
-    }
-    @Override
-    public void onAddFlight(AddFlightEvent e, Admin admin, Scanner scanner) {
+public class AdminInputSystem extends InputSystem{
+    public void onAddFlight(Scanner scanner) {
         //Take the flight details from admin
         //Confirm the departure and destination//
         System.out.println("Enter the departure location in the form 'City, Country': ");
@@ -103,17 +41,17 @@ public class AdminInputSystem implements AddFlightListener,RemoveFlightListener,
         }
         ////////////////////////////////////////////////
         //Create a new flight//
-        admin.addFlight(From, To, date, time, seats, price);
+        FlightSystem.addFlight(From, To, date, time, seats, price);
         System.out.println("Flight added successfully!");
         ////////////////////////////////////////////////
     }
 
-    @Override
-    public void onRemoveFlight(RemoveFlightEvent event, Admin admin, Scanner scanner) {
+
+    public void onRemoveFlight(Scanner scanner) {
         OutputSystem.printFlights();
         System.out.print("Enter the FlightID to remove: ");
         String flightID = takeFlightIDInput(scanner);
-        if (flightID != null && admin.removeFlight(flightID)) {
+        if (flightID != null && FlightSystem.removeFlight(flightID)) {
             System.out.println("Flight removed successfully!");
         }
         else{
@@ -121,8 +59,7 @@ public class AdminInputSystem implements AddFlightListener,RemoveFlightListener,
         }
     }
 
-    @Override
-    public void onModifyFlight(ModifyFlightEvent event, Admin admin, Scanner scanner) {
+    public void onModifyFlight(Scanner scanner) {
         OutputSystem.printFlights();
         System.out.println("Enter the FlightID to modify: ");
         String flightID = takeFlightIDInput(scanner);
@@ -143,7 +80,7 @@ public class AdminInputSystem implements AddFlightListener,RemoveFlightListener,
                         System.out.println("INVALID INPUT! Format should be 'DD.MM.YYYY'!");
                         return;
                     }
-                    admin.modifyFlight(flightID, mod, date);
+                    FlightSystem.modifyFlight(flightID, mod, date);
                     break;
                 case B:
                     System.out.println("Enter the new departure time in the form 'HH:MM' (24-hour format): ");
@@ -152,7 +89,7 @@ public class AdminInputSystem implements AddFlightListener,RemoveFlightListener,
                         System.out.println("INVALID INPUT! Format should be 'HH:MM'!");
                         return;
                     }
-                    admin.modifyFlight(flightID, mod, time);
+                    FlightSystem.modifyFlight(flightID, mod, time);
                     break;
                 case C:
                     System.out.println("Enter the new number of seats: ");
@@ -161,7 +98,7 @@ public class AdminInputSystem implements AddFlightListener,RemoveFlightListener,
                         System.out.println("INVALID INPUT! Seats should be a valid integer!");
                         return;
                     }
-                    admin.modifyFlight(flightID, mod, Integer.toString(seats));
+                    FlightSystem.modifyFlight(flightID, mod, Integer.toString(seats));
                     break;
                 case D:
                     System.out.println("Enter the new price per seat: ");
@@ -170,7 +107,7 @@ public class AdminInputSystem implements AddFlightListener,RemoveFlightListener,
                         System.out.println("INVALID INPUT! Price should be a valid decimal number!");
                         return;
                     }
-                    admin.modifyFlight(flightID, mod, Double.toString(price));
+                    FlightSystem.modifyFlight(flightID, mod, Double.toString(price));
                     break;
                 default:
                     return;
