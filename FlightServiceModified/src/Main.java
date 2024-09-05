@@ -31,19 +31,19 @@ public class Main {
                     switch (input) {
                         case AdminInput.A:
                             // Register listener for adding new flight
-                            adminEventsManager.add_AddFlight_Listener(admin);
+                            adminEventsManager.connect_AddFlight(admin);
                             // Fire event to add new flight
                             adminEventsManager.fireAddFlight(scanner);
                             break;
                         case AdminInput.B:
                             // Register listener for removing flight
-                            adminEventsManager.add_RemoveFlight_Listener(admin);
+                            adminEventsManager.connect_RemoveFlight(admin);
                             // Fire event to remove flight
                             adminEventsManager.fireRemoveFlight(scanner);
                             break;
                         case AdminInput.C:
                             // Register listener for modifying flight
-                            adminEventsManager.add_ModifyFlight_Listener(admin);
+                            adminEventsManager.connect_ModifyFlight(admin);
                             // Fire event to modify flight
                             adminEventsManager.fireModifyFlight(scanner);
                             break;
@@ -63,10 +63,37 @@ public class Main {
         }
         else{
             Passenger passenger = (Passenger)user;
-            PassengerInputSystem passengerInputSystem = new PassengerInputSystem();
             PassengerEventsManager passengerEventsManager = new PassengerEventsManager();
             while (true) {
                 OutputSystem.viewOptions(UserType.PASSENGER);
+                String choice = scanner.nextLine();
+                try {
+                    PassengerInput input = PassengerInput.valueOf(choice.toUpperCase());
+                    switch (input) {
+                        case A:
+                            // Register listener for adding new flight
+                            passengerEventsManager.connect_BookFlight(passenger);
+                            // Fire event to add new flight
+                            passengerEventsManager.fireBookFlight(scanner);
+                            break;
+                        case B:
+                            // Register listener for removing flight
+                            passengerEventsManager.connect_CancelFlight(passenger);
+                            // Fire event to remove flight
+                            passengerEventsManager.fireCancelFlight(scanner);
+                            break;
+                        case C:
+                            // View all flights
+                            OutputSystem.printFlights(passenger);
+                            break;
+                        case D:
+                            // Logout and exit
+                            System.out.println("Goodbye!");
+                            return;
+                    }
+                }catch (IllegalArgumentException e){
+                    System.out.println("Invalid input!!");
+                }
             }
         }
     }

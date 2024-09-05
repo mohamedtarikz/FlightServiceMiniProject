@@ -8,7 +8,7 @@ public class Flight {
     private FlightType flightType;
     private int seats;
     private double price;
-    private List<Passenger> passengers;
+    private int passengersCount;
     private Location from;
     private Location to;
     private String date;
@@ -20,7 +20,7 @@ public class Flight {
         this.flightType = flightType;
         this.seats = seats;
         this.price = price;
-        this.passengers = new ArrayList<Passenger>();
+        this.passengersCount = 0;
         this.from = from;
         this.to = to;
         this.date = date;
@@ -55,8 +55,11 @@ public class Flight {
         this.price = price;
     }
 
-    public List<Passenger> getPassengers() {
-        return passengers;
+    public int getRemainingSeats() {
+        return (seats - passengersCount);
+    }
+    public int getPassengersCount() {
+        return passengersCount;
     }
 
     public Location getFrom() {
@@ -81,6 +84,13 @@ public class Flight {
         this.time = time;
     }
 
+    public void addPassenger(int count) {
+        passengersCount += count;
+    }
+    public void removePassenger(int count) {
+        passengersCount -= count;
+    }
+
     @Override
     public String toString() {
         System.out.println("================================================");
@@ -89,7 +99,7 @@ public class Flight {
         System.out.println("    Destination = " + to.getCity() + ", " + to.getCountry());
         System.out.println("    Date = " + date);
         System.out.println("    Time = " + time);
-        System.out.println("    Remaining Seats = " + seats);
+        System.out.println("    Remaining Seats = " + getRemainingSeats());
         System.out.println("    Price = " + price);
         System.out.println("================================================");
 

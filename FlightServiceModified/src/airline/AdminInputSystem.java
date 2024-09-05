@@ -69,8 +69,8 @@ public class AdminInputSystem extends InputSystem{
         System.out.println("Choose property to be modified: ");
         System.out.println("A- Date\nB- Time\nC- Seats\nD- Price\nAnything else to CANCEL!");
         String choice = scanner.nextLine().toUpperCase();
-        ModificationOptions mod = ModificationOptions.valueOf(choice);
         try{
+            ModificationOptions mod = ModificationOptions.valueOf(choice);
             switch (mod) {
                 case A:
                     System.out.println("Enter the new departure date in the form 'DD.MM.YYYY': ");

@@ -42,6 +42,7 @@ public class FlightSystem{
         }
         return null;
     }
+
     public static void addFlight(Location from, Location to, String date, String time, int seats, double price){
         if(from.getCountry().equals(to.getCountry()))
             domFlights.add(new Flight("D" + (++num_dom),FlightType.DOMESTIC,seats,price,from,to,date,time));
@@ -49,29 +50,23 @@ public class FlightSystem{
             interFlights.add(new Flight("I" + (++num_int),FlightType.INTERNATIONAL,seats,price,from,to,date,time));
     }
     public static boolean removeFlight(String id) {
-        if (id.charAt(0) == 'D') {
-            for (Flight flight : domFlights) {
-                if (flight.getId().equals(id)) {
-                    domFlights.remove(flight);
-                    num_dom--;
-                    return true;
-                }
-            }
-            return false;
-        } else if (id.charAt(0) == 'I') {
-            for (Flight flight : interFlights) {
-                if (flight.getId().equals(id)) {
-                    interFlights.remove(flight);
-                    num_int--;
-                    return true;
-                }
-            }
+        Flight flight = getFlight(id);
+        if (flight == null){
             return false;
         }
-        return false;
+        if (flight.getFlightType() == FlightType.DOMESTIC) {
+            domFlights.remove(flight);
+            return true;
+        } else {
+            interFlights.remove(flight);
+            return true;
+        }
     }
     public static void modifyFlight(String id, ModificationOptions option, String value) {
         Flight flightMod = getFlight(id);
+        if (flightMod == null) {
+            return;
+        }
         switch (option) {
             case A :
                 flightMod.setDate(value);
@@ -87,4 +82,33 @@ public class FlightSystem{
         }
     }
 
+    public static void bookFlight(Passenger passenger, FlightType flightType, String id, int tickets){
+        Flight flight = getFlight(id);
+        if (flight == null) {
+            return;
+        }
+        if (flight.getRemainingSeats() >= tickets) {
+            passenger.addFlight(flight, tickets);
+            flight.addPassenger(tickets);
+            System.out.println("You have successfully booked a flight");
+        }
+        else{
+            System.out.println("Sorry, there are not enough seats available");
+        }
+    }
+    public static void cancelFlight(Passenger passenger, String id, int bookedTickets, int tickets){
+        Flight flight = getFlight(id);
+        if (flight == null) {
+            return;
+        }
+        if (bookedTickets < tickets) {
+            System.out.println("You do not have enough tickets");
+        }
+        else{
+            flight.removePassenger(tickets);
+        }
+    }
+    public static void printFlights(){
+        System.out.println("Domestic flights");
+    }
 }
