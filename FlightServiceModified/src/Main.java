@@ -41,31 +41,30 @@ public class Main {
                 try {
                     // Convert user input to AdminInput enum
                     AdminInput input = AdminInput.valueOf(choice.toUpperCase());
-
                     switch (input) {
-                        case AdminInput.A:
+                        case A:
                             // Register listener for adding new flight
                             adminEventsManager.connect_AddFlight(admin);
                             // Trigger the event to add a new flight
                             adminEventsManager.fireAddFlight(scanner);
                             break;
-                        case AdminInput.B:
+                        case B:
                             // Register listener for removing flight
                             adminEventsManager.connect_RemoveFlight(admin);
                             // Trigger the event to remove a flight
                             adminEventsManager.fireRemoveFlight(scanner);
                             break;
-                        case AdminInput.C:
+                        case C:
                             // Register listener for modifying flight
                             adminEventsManager.connect_ModifyFlight(admin);
                             // Trigger the event to modify a flight
                             adminEventsManager.fireModifyFlight(scanner);
                             break;
-                        case AdminInput.D:
+                        case D:
                             // Display all available flights
                             OutputSystem.printFlights();
                             break;
-                        case AdminInput.E:
+                        case E:
                             // Exit the system by logging out
                             System.out.println("Goodbye!");
                             return;
