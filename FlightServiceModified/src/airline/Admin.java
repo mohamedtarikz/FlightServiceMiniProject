@@ -7,9 +7,9 @@ public class Admin extends SysUser implements AddFlightListener, RemoveFlightLis
 
     // Constructor to initialize Admin with a username and password
     public Admin(String name, String pass) {
-        this.setUsername(name);  // Setting username of the admin
-        this.setPassword(pass);  // Setting password of the admin
-        this.setUserType(UserType.ADMIN);  // Setting the user type as ADMIN
+        this.username = name;  // Setting username of the admin
+        this.password = pass;  // Setting password of the admin
+        this.userType = UserType.ADMIN;  // Setting the user type as ADMIN
     }
 
     // Overriding the onAddFlight method from AddFlightListener interface

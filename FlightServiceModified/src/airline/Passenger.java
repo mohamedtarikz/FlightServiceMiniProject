@@ -12,9 +12,9 @@ public class Passenger extends SysUser implements BookFlightListener, CancelFlig
 
     // Constructor to initialize the Passenger object with a username, password, and user type
     public Passenger(String name, String pass) {
-        this.setUsername(name);
-        this.setPassword(pass);
-        this.setUserType(UserType.PASSENGER);
+        this.username = name;
+        this.password = pass;
+        this.userType = UserType.PASSENGER;
     }
 
     // Method to handle user input for booking and cancelling flights

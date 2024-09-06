@@ -1,9 +1,9 @@
 package airline;
 
 public abstract class SysUser {
-    private String username;
-    private String password;
-    private UserType userType;
+    protected String username;
+    protected String password;
+    protected UserType userType;
 
     public static SysUser login(String username, String password, UserService userService) {
         for (SysUser user : userService.getUsers()) {
@@ -21,24 +21,12 @@ public abstract class SysUser {
         return username;
     }
 
-    protected void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getPassword() {
         return password;
     }
 
-    protected void setPassword(String password) {
-        this.password = password;
-    }
-
     public UserType getUserType() {
         return userType;
-    }
-
-    protected void setUserType(UserType userType) {
-        this.userType = userType;
     }
 
 }
