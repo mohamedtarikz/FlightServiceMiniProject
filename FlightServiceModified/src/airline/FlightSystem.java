@@ -101,14 +101,14 @@ public class FlightSystem {
     }
 
     // Book a flight for a passenger, ensuring there are enough seats available
-    public static void bookFlight(Passenger passenger, FlightType flightType, String id, int tickets) {
+    public static void bookFlight(Cart cart, FlightType flightType, String id, int tickets) {
         Flight flight = getFlight(id); // Find the flight by its ID
         if (flight == null) {
             return; // Return if no flight is found
         }
         // Check if enough seats are available for the booking
         if (flight.getRemainingSeats() >= tickets) {
-            passenger.addFlight(flight, tickets); // Add the flight to the passenger's booking
+            cart.addFlight(flight, tickets); // Add the flight to the passenger's booking
             flight.addPassenger(tickets); // Update the flight's passenger count
             System.out.println("You have successfully booked a flight");
         } else {
@@ -117,7 +117,7 @@ public class FlightSystem {
     }
 
     // Cancel a flight for a passenger, ensuring the passenger has enough tickets
-    public static void cancelFlight(Passenger passenger, String id, int bookedTickets, int tickets) {
+    public static void cancelFlight(Cart cart, String id, int bookedTickets, int tickets) {
         Flight flight = getFlight(id); // Find the flight by its ID
         if (flight == null) {
             return; // Return if no flight is found
@@ -127,7 +127,7 @@ public class FlightSystem {
             System.out.println("You do not have enough tickets");
         } else {
             flight.removePassenger(tickets); // Remove the tickets from the flight
-            passenger.removeFlight(flight, bookedTickets); // Remove the flight from the passenger's bookings
+            cart.removeFlight(flight, tickets); // Remove the flight from the passenger's bookings
         }
     }
 }

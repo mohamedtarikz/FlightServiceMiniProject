@@ -38,9 +38,9 @@ public class OutputSystem {
     }
 
     // Method to print the flights booked by a specific passenger
-    public static boolean printFlights(Passenger passenger){
+    public static boolean printFlights(Cart cart){
         // Get the list of flights the passenger has booked
-        List<Flight> flights = passenger.getFlights();
+        List<Flight> flights = cart.getFlights();
         // If there are flights, print them
         if (!flights.isEmpty()) {
             System.out.println("====================Your Flights====================");
@@ -52,7 +52,7 @@ public class OutputSystem {
                 System.out.println("Destination: " + flight.getTo().getCity() + ", " + flight.getTo().getCountry());
                 System.out.println("Date: " + flight.getDate());
                 System.out.println("Time: " + flight.getTime());
-                System.out.println("Tickets Booked: " + passenger.getFlightTickets(flight));
+                System.out.println("Tickets Booked: " + cart.getFlightTickets(flight));
                 System.out.println("Price: " + flight.getPrice());
                 System.out.println("------------------------------------------------");
             }

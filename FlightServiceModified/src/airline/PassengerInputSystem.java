@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class PassengerInputSystem extends InputSystem {
 
     // Handles the process of booking a flight for a passenger
-    public void onBookFlight(Passenger passenger, Scanner scanner) {
+    public void onBookFlight(Cart cart, Scanner scanner) {
         // Prompt the user to choose between domestic and international flights
         System.out.println("A- Domestic flights\nB- International flights\nAnything else to CANCEL");
         String flightType = scanner.nextLine().toUpperCase();
@@ -41,7 +41,7 @@ public class PassengerInputSystem extends InputSystem {
                     }
 
                     // Book the flight for the passenger
-                    FlightSystem.bookFlight(passenger, FlightType.DOMESTIC, domID, domTickets);
+                    FlightSystem.bookFlight(cart, FlightType.DOMESTIC, domID, domTickets);
                     break; // Added break to avoid fall-through
 
                 case B:
@@ -70,7 +70,7 @@ public class PassengerInputSystem extends InputSystem {
                     }
 
                     // Book the flight for the passenger
-                    FlightSystem.bookFlight(passenger, FlightType.INTERNATIONAL, intID, intTickets);
+                    FlightSystem.bookFlight(cart, FlightType.INTERNATIONAL, intID, intTickets);
                     break; // Added break to avoid fall-through
 
             }
@@ -80,9 +80,9 @@ public class PassengerInputSystem extends InputSystem {
     }
 
     // Handles the process of canceling a flight booking for a passenger
-    public void onCancelFlight(Passenger passenger, Scanner scanner) {
+    public void onCancelFlight(Cart cart, Scanner scanner) {
         // Display the passenger's booked flights
-        if (!OutputSystem.printFlights(passenger)) {
+        if (!OutputSystem.printFlights(cart)) {
             return;
         }
 
@@ -96,7 +96,7 @@ public class PassengerInputSystem extends InputSystem {
         }
 
         // Check if the passenger has tickets for the specified flight
-        if (passenger.getFlightTickets(FlightSystem.getFlight(id)) == 0) {
+        if (cart.getFlightTickets(FlightSystem.getFlight(id)) == 0) {
             System.out.println("You have no tickets to cancel!!");
             return;
         }
@@ -111,6 +111,6 @@ public class PassengerInputSystem extends InputSystem {
         }
 
         // Cancel the specified number of tickets for the flight
-        FlightSystem.cancelFlight(passenger, id, passenger.getFlightTickets(FlightSystem.getFlight(id)), tickets);
+        FlightSystem.cancelFlight(cart, id, cart.getFlightTickets(FlightSystem.getFlight(id)), tickets);
     }
 }

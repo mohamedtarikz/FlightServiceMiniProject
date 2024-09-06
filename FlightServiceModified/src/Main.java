@@ -103,7 +103,7 @@ public class Main {
                             break;
                         case C:
                             // Display all available flights
-                            OutputSystem.printFlights(passenger);
+                            OutputSystem.printFlights(passenger.getCart());
                             break;
                         case D:
                             // Exit the system by logging out
