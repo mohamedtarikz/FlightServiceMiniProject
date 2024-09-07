@@ -41,7 +41,7 @@ public class PassengerInputSystem extends InputSystem {
                     }
 
                     // Book the flight for the passenger
-                    FlightSystem.bookFlight(cart, FlightType.DOMESTIC, domID, domTickets);
+                    FlightSystem.bookFlight(cart, domID, domTickets);
                     break; // Added break to avoid fall-through
 
                 case B:
@@ -70,7 +70,7 @@ public class PassengerInputSystem extends InputSystem {
                     }
 
                     // Book the flight for the passenger
-                    FlightSystem.bookFlight(cart, FlightType.INTERNATIONAL, intID, intTickets);
+                    FlightSystem.bookFlight(cart, intID, intTickets);
                     break; // Added break to avoid fall-through
 
             }

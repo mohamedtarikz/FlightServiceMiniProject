@@ -101,7 +101,7 @@ public class FlightSystem {
     }
 
     // Book a flight for a passenger, ensuring there are enough seats available
-    public static void bookFlight(Cart cart, FlightType flightType, String id, int tickets) {
+    public static void bookFlight(Cart cart, String id, int tickets) {
         Flight flight = getFlight(id); // Find the flight by its ID
         if (flight == null) {
             return; // Return if no flight is found
