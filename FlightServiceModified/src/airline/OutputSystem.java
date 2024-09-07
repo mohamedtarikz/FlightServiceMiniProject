@@ -2,7 +2,7 @@ package airline;
 
 import java.util.List;
 
-public class OutputSystem {
+public abstract class OutputSystem {
     // Method to print all domestic and international flights
     public static void printFlights(){
         // Print header for domestic flights
