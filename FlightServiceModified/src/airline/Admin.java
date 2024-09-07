@@ -3,7 +3,7 @@ package airline;
 import java.util.Scanner;
 
 public class Admin extends SysUser implements AddFlightListener, RemoveFlightListener, ModifyFlightListener {
-    AdminInputSystem adminInputSystem = new AdminInputSystem();  // Creating an instance of AdminInputSystem to handle admin operations
+    private AdminInputSystem adminInputSystem = new AdminInputSystem();  // Creating an instance of AdminInputSystem to handle admin operations
 
     // Constructor to initialize Admin with a username and password
     public Admin(String name, String pass) {

@@ -5,7 +5,7 @@ import java.util.*;
 public class Passenger extends SysUser implements BookFlightListener, CancelFlightListener {
 
     // Instance of PassengerInputSystem to handle user input for booking and cancelling flights
-    PassengerInputSystem passengerInputSystem = new PassengerInputSystem();
+    private PassengerInputSystem passengerInputSystem = new PassengerInputSystem();
 
     // Cart to store the flight details of the passenger
     private Cart cart = new Cart();
