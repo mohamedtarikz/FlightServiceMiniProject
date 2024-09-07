@@ -3,7 +3,7 @@ package airline;
 import java.util.Scanner;
 import java.util.regex.*;
 
-public class InputSystem {
+public abstract class InputSystem {
     // Method to take and validate input for a Location (City, Country)
     // It expects input in the format 'City, Country' (e.g., 'Cairo, Egypt').
     protected Location takeLocationInput(Scanner scanner) {
